@@ -1,5 +1,4 @@
-﻿using AwesomApp.Services;
-using AwesomApp.Views;
+﻿using AwesomApp.Views;
 
 using System;
 
@@ -14,8 +13,6 @@ namespace AwesomApp
         public App()
         {
             InitializeComponent();
-
-            DependencyService.Register<MockDataStore>();
             MainPage = new AppShell();
         }
 
