@@ -1,12 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="AwesomApp.Views.FoodEquipmentPage">
+             x:Class="AwesomApp.Views.FoodEquipmentPage"
+             xmlns:viewmodels="clr-namespace:AwesomApp.ViewModels"
+             x:DataType="viewmodels:FoodEquipmentViewModel"
+             BackgroundColor="AliceBlue">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="{Binding CountDisplay }"
+                   x:Name="LabelCount"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="{Binding CountDisplay}" x:Name="ButtonClick" Command="{Binding IncreaseCountCmd}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
