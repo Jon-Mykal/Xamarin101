@@ -2,16 +2,76 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AwesomApp.Views.FoodEquipmentPage"
+             xmlns:models="clr-namespace:AwesomApp.Models"
              xmlns:viewmodels="clr-namespace:AwesomApp.ViewModels"
              x:DataType="viewmodels:FoodEquipmentViewModel"
+             x:Name="FoodPage"
              BackgroundColor="AliceBlue">
     <ContentPage.Content>
-        <StackLayout>
+        <!--<StackLayout>
             <Label Text="{Binding CountDisplay }"
                    x:Name="LabelCount"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <Button Text="{Binding CountDisplay}" x:Name="ButtonClick" Command="{Binding IncreaseCountCmd}"/>
-        </StackLayout>
+        </StackLayout>-->
+        <ListView BackgroundColor="Transparent"
+                  CachingStrategy="RecycleElement"
+                  SelectedItem="{Binding SelectedFood}"
+                  ItemsSource="{Binding Food}"
+                  SeparatorVisibility="None"
+                  IsPullToRefreshEnabled="True"
+                  IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                  RefreshCommand="{Binding RefreshCmd}"
+                  RefreshControlColor="CadetBlue"
+                  HasUnevenRows="True">
+
+            <ListView.Header>
+                <StackLayout Orientation="Horizontal" BackgroundColor="Beige">
+                    <Label Text="Meals" VerticalOptions="Center" />
+                </StackLayout>
+            </ListView.Header>
+            <!-- Styling the template -->
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="models:Food">
+                    <ViewCell>
+                        <ViewCell.ContextActions>
+                            <!-- Use Relative/Reference Source Binding -->
+                            <!-- Syntax for Command Parameter is using the Food model to be
+                                passed to the favourite command. -->
+                            <MenuItem Text="Favourite" 
+                                      Command="{Binding 
+                                Source={x:Reference FoodPage},
+                                Path=BindingContext.FavouriteCmd}"
+                                      CommandParameter="{Binding .}"/>
+                            <MenuItem Text="Delete" />
+                        </ViewCell.ContextActions>
+                        <Grid Padding="10">
+                            <Frame CornerRadius="15"
+                                   HasShadow="True">
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding Image}"
+                                           WidthRequest="50"/>
+                                    <StackLayout VerticalOptions="Center">
+                                        <Label VerticalOptions="Center"
+                                            FontSize="25"
+                                            Text="{Binding Name}"/>
+                                        <Label VerticalOptions="Center"
+                                               Text="{Binding Kitchen}"/>
+                                    </StackLayout>
+                                    <!-- Relative Source Binding -->
+                                    <Button Text="Favourite"
+                                            Command="{Binding 
+                                        Source={RelativeSource 
+                                        AncestorType={x:Type viewmodels:FoodEquipmentViewModel}},
+                                        Path=FavouriteCmd}"
+                                            CommandParameter="{Binding .}" />
+                                </StackLayout>
+                            </Frame>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </ContentPage.Content>
 </ContentPage>
