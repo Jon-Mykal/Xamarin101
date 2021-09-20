@@ -24,6 +24,7 @@ namespace AwesomApp.ViewModels
             IncreaseCountCmd = ReactiveCommand.Create(IncreaseCount);
             RefreshCmd = new AsyncCommand(Refresh);
             FavouriteCmd = new AsyncCommand<Food>(MakeFavourite);
+            SelectedCmd = new AsyncCommand<object>(SelectFood);
 
             Title = "Food Equipment";
             Food = new ObservableRangeCollection<Food>();
@@ -56,25 +57,28 @@ namespace AwesomApp.ViewModels
 
         public AsyncCommand<Food> FavouriteCmd { get; set; }
 
+        public AsyncCommand<object> SelectedCmd { get; set; }
+
         Food previouslySelectedFood;
         Food selectedFood;
         public Food SelectedFood
         {
             get => selectedFood;
-            set
-            {
-                if (value != null)
-                {
-                    Application.Current.MainPage.DisplayAlert("Selected", value.Name, "Ok");
-                    previouslySelectedFood = value;
-                    value = null;
-                }
-
-                SetProperty(ref selectedFood, value);
-            }
+            set => SetProperty(ref selectedFood, value);
         }
 
 
+        async Task SelectFood(object args)
+        {
+            var food = args as Food;
+
+            if (food == null)
+            {
+                return;
+            }
+
+            await Application.Current.MainPage.DisplayAlert("Selected", food.Name, "Ok");
+        }
         async Task MakeFavourite(Food food)
         {
             if (food == null)
