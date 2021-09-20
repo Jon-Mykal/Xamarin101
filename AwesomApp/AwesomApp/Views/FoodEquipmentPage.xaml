@@ -4,9 +4,15 @@
              x:Class="AwesomApp.Views.FoodEquipmentPage"
              xmlns:models="clr-namespace:AwesomApp.Models"
              xmlns:viewmodels="clr-namespace:AwesomApp.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:DataType="viewmodels:FoodEquipmentViewModel"
              x:Name="FoodPage"
              BackgroundColor="AliceBlue">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <!--<StackLayout>
             <Label Text="{Binding CountDisplay }"
@@ -25,7 +31,13 @@
                   RefreshCommand="{Binding RefreshCmd}"
                   RefreshControlColor="CadetBlue"
                   HasUnevenRows="True">
+            <ListView.Behaviors>
+                <xct:EventToCommandBehavior 
+                    EventName="ItemSelected"
+                    Command="{Binding SelectedCmd}"
+                    EventArgsConverter="{StaticResource ItemSelectedEventArgsConverter}"/>
 
+            </ListView.Behaviors>
             <ListView.Header>
                 <StackLayout Orientation="Horizontal" BackgroundColor="Beige">
                     <Label Text="Meals" VerticalOptions="Center" />
