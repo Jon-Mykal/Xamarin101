@@ -13,6 +13,10 @@
             <xct:ItemSelectedEventArgsConverter x:Key="ItemSelectedEventArgsConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Add" Command="{Binding AddCmd}" />
+        <ToolbarItem Text="API" Command="{Binding APICmd}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <!--<StackLayout>
             <Label Text="{Binding CountDisplay }"
@@ -56,7 +60,11 @@
                                 Source={x:Reference FoodPage},
                                 Path=BindingContext.FavouriteCmd}"
                                       CommandParameter="{Binding .}"/>
-                            <MenuItem Text="Delete" />
+                            <MenuItem Text="Delete"
+                                      Command="{Binding
+                                 Source={x:Reference FoodPage},
+                                 Path=BindingContext.RemoveCmd}"
+                                      CommandParameter="{Binding .}"/>
                         </ViewCell.ContextActions>
                         <Grid Padding="10">
                             <Frame CornerRadius="15"
