@@ -1,4 +1,5 @@
 ﻿using AwesomApp.Models;
+using AwesomApp.Services;
 
 using DynamicData;
 
@@ -25,17 +26,19 @@ namespace AwesomApp.ViewModels
             RefreshCmd = new AsyncCommand(Refresh);
             FavouriteCmd = new AsyncCommand<Food>(MakeFavourite);
             SelectedCmd = new AsyncCommand<object>(SelectFood);
-
+            AddCmd = new AsyncCommand(AddFood);
+            RemoveCmd = new AsyncCommand<Food>(RemoveFood);
+            APICmd = new AsyncCommand(GetOwners);
             Title = "Food Equipment";
             Food = new ObservableRangeCollection<Food>();
-            FoodGroups = new ObservableRangeCollection<Grouping<string, Food>>();
+            //FoodGroups = new ObservableRangeCollection<Grouping<string, Food>>();
 
-            var image = "https://www.eatthis.com/wp-content/uploads/sites/4//media/images/ext/966368714/kfc-original-chicken-recipe.jpg?quality=82&strip=1&resize=640%2C360";
-            Food.Add(new Food { Kitchen = "KFC", Name = "Chicken Box", Image = image });
-            Food.Add(new Food { Kitchen = "Burger King", Name = "Whopper", Image = image });
-            Food.Add(new Food { Kitchen = "KFC", Name = "Meal Deal", Image = image });
+            //var image = "https://www.eatthis.com/wp-content/uploads/sites/4//media/images/ext/966368714/kfc-original-chicken-recipe.jpg?quality=82&strip=1&resize=640%2C360";
+            //Food.Add(new Food { Kitchen = "KFC", Name = "Chicken Box", Image = image });
+            //Food.Add(new Food { Kitchen = "Burger King", Name = "Whopper", Image = image });
+            //Food.Add(new Food { Kitchen = "KFC", Name = "Meal Deal", Image = image });
 
-            FoodGroups.Add(new Grouping<string, Food>("KFC", Food.Take(2)));
+            //FoodGroups.Add(new Grouping<string, Food>("KFC", Food.Take(2)));
         }
 
         public ObservableRangeCollection<Food> Food { get; set; }
@@ -59,6 +62,12 @@ namespace AwesomApp.ViewModels
 
         public AsyncCommand<object> SelectedCmd { get; set; }
 
+        public AsyncCommand<Food> RemoveCmd { get; set; }
+
+        public AsyncCommand AddCmd { get; set; }
+
+        public AsyncCommand APICmd { get; set; }
+
         Food previouslySelectedFood;
         Food selectedFood;
         public Food SelectedFood
@@ -67,6 +76,15 @@ namespace AwesomApp.ViewModels
             set => SetProperty(ref selectedFood, value);
         }
 
+
+        async Task AddFood()
+        {
+            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Name");
+            var kitchen = await App.Current.MainPage.DisplayPromptAsync("Kitchen", "Kitchen");
+
+            await FoodService.AddFood(name, kitchen);
+            await Refresh();
+        }
 
         async Task SelectFood(object args)
         {
@@ -79,6 +97,7 @@ namespace AwesomApp.ViewModels
 
             await Application.Current.MainPage.DisplayAlert("Selected", food.Name, "Ok");
         }
+
         async Task MakeFavourite(Food food)
         {
             if (food == null)
@@ -89,10 +108,18 @@ namespace AwesomApp.ViewModels
             await Application.Current.MainPage.DisplayAlert("Favourited", food.Name, "Ok");
         }
 
+        async Task RemoveFood(Food food)
+        {
+            await FoodService.RemoveFood(food.Id);
+            await Refresh();
+        }
         async Task Refresh()
         {
             IsBusy = true;
             await Task.Delay(2000);
+            Food.Clear();
+            var foods = await FoodService.GetAllFood();
+            Food.AddRange(foods);
             IsBusy = false;
         }
 
@@ -100,6 +127,12 @@ namespace AwesomApp.ViewModels
         {
             count++;
             CountDisplay = $"You clicked {count} time(s)";
+        }
+
+        async Task GetOwners()
+        {
+            var owners = await FoodService.GetOwners();
+            await App.Current.MainPage.DisplayAlert("API Response", owners, "Ok");
         }
     }
 }
