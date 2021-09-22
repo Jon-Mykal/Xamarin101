@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AwesomApp.Views.AddFoodPage"
+             xmlns:viewmodels="clr-namespace:AwesomApp.ViewModels"
+             x:DataType="viewmodels:AddFoodViewModel">
+    <ContentPage.Content>
+        <StackLayout Padding="10, 10">
+            <Label Text="Name:" 
+                VerticalOptions="Start"
+                HorizontalOptions="StartAndExpand" />
+            <Entry Text="{Binding Name}"/>
+            <Label Text="Kitchen"
+                VerticalOptions="Start" 
+                HorizontalOptions="StartAndExpand" />
+            <Entry Text="{Binding Kitchen}" />
+            <Button Padding="100, 0"
+                    Margin="0, 0, 0, 35"
+                    CornerRadius="25"
+                    Command="{Binding SaveCmd}"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Save"
+                    VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
