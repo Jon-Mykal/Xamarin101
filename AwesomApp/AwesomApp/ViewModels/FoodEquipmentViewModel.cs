@@ -1,5 +1,6 @@
 ﻿using AwesomApp.Models;
 using AwesomApp.Services;
+using AwesomApp.Views;
 
 using DynamicData;
 
@@ -79,11 +80,12 @@ namespace AwesomApp.ViewModels
 
         async Task AddFood()
         {
-            var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Name");
-            var kitchen = await App.Current.MainPage.DisplayPromptAsync("Kitchen", "Kitchen");
+            //var name = await App.Current.MainPage.DisplayPromptAsync("Name", "Name");
+            //var kitchen = await App.Current.MainPage.DisplayPromptAsync("Kitchen", "Kitchen");
 
-            await FoodService.AddFood(name, kitchen);
-            await Refresh();
+            //await FoodService.AddFood(name, kitchen);
+            //await Refresh();
+            await Shell.Current.GoToAsync(nameof(AddFoodPage));
         }
 
         async Task SelectFood(object args)
@@ -95,7 +97,7 @@ namespace AwesomApp.ViewModels
                 return;
             }
 
-            await Application.Current.MainPage.DisplayAlert("Selected", food.Name, "Ok");
+            await Shell.Current.GoToAsync($"{nameof(FoodDetailsPage)}?FoodId={food.Id}");
         }
 
         async Task MakeFavourite(Food food)
@@ -116,7 +118,7 @@ namespace AwesomApp.ViewModels
         async Task Refresh()
         {
             IsBusy = true;
-            await Task.Delay(2000);
+            await Task.Delay(500);
             Food.Clear();
             var foods = await FoodService.GetAllFood();
             Food.AddRange(foods);
