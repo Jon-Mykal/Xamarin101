@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AwesomApp.Views.FoodDetailsPage"
+             xmlns:viewmodels="clr-namespace:AwesomApp.ViewModels"
+             xmlns:models="clr-namespace:AwesomApp.Models"
+             x:Name="DetailsPage"
+             x:DataType="viewmodels:FoodDetailsViewModel">
+    <ContentPage.Content>
+        <StackLayout Padding="20">
+            <Label Text="{Binding Food.Name, StringFormat='Name: {0}'}" />
+            <Label Text="{Binding Food.Kitchen, StringFormat='Kitchen: {0}'}" />
+            <Image HorizontalOptions="Center" Source="{Binding Food.Image}" />
+
+            <Button Padding="100, 0"
+                    Margin="0, 0, 0, 35"
+                    CornerRadius="25"
+                    Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:FoodDetailsViewModel}}
+                , Path=DoneCmd}"
+                    HorizontalOptions="CenterAndExpand"
+                    Text="Done"
+                    VerticalOptions="EndAndExpand"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
