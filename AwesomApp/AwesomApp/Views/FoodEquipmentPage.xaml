@@ -8,6 +8,8 @@
              x:DataType="viewmodels:FoodEquipmentViewModel"
              x:Name="FoodPage"
              Shell.PresentationMode="Modal"
+             Shell.FlyoutItemIsVisible="True"
+             Shell.NavBarIsVisible="True"
              BackgroundColor="AliceBlue">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -16,7 +18,8 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Add" Command="{Binding AddCmd}" />
-        <ToolbarItem Text="API" Command="{Binding APICmd}" />
+        <ToolbarItem Text="Logout" Command="{Binding LogoutCmd}" />
+        
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <!--<StackLayout>
