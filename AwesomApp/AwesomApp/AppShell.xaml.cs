@@ -13,6 +13,9 @@ namespace AwesomApp
         public AppShell()
         {
             InitializeComponent();
+
+            Routing.RegisterRoute(nameof(AddFoodPage), typeof(AddFoodPage));
+            Routing.RegisterRoute(nameof(FoodDetailsPage), typeof(FoodDetailsPage));
         }
 
     }
