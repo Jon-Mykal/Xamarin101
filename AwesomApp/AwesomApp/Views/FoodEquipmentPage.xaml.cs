@@ -22,6 +22,11 @@ namespace AwesomApp.Views
             BindingContext = new FoodEquipmentViewModel();
         }
 
-     
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await ((FoodEquipmentViewModel)BindingContext).RefreshCmd.ExecuteAsync();
+        }
+
     }
 }
