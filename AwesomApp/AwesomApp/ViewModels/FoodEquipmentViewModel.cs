@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 using Xamarin.CommunityToolkit.ObjectModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace AwesomApp.ViewModels
@@ -30,6 +31,7 @@ namespace AwesomApp.ViewModels
             AddCmd = new AsyncCommand(AddFood);
             RemoveCmd = new AsyncCommand<Food>(RemoveFood);
             APICmd = new AsyncCommand(GetOwners);
+            LogoutCmd = new AsyncCommand(Logout);
             Title = "Food Equipment";
             Food = new ObservableRangeCollection<Food>();
             //FoodGroups = new ObservableRangeCollection<Grouping<string, Food>>();
@@ -68,6 +70,8 @@ namespace AwesomApp.ViewModels
         public AsyncCommand AddCmd { get; set; }
 
         public AsyncCommand APICmd { get; set; }
+
+        public AsyncCommand LogoutCmd { get; set; }
 
         Food previouslySelectedFood;
         Food selectedFood;
@@ -129,6 +133,12 @@ namespace AwesomApp.ViewModels
         {
             count++;
             CountDisplay = $"You clicked {count} time(s)";
+        }
+
+        async Task Logout()
+        {
+            Preferences.Set("loggedIn", false);
+            await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
 
         async Task GetOwners()
