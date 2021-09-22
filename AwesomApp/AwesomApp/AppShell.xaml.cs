@@ -14,8 +14,13 @@ namespace AwesomApp
         {
             InitializeComponent();
 
+            /* IMPORTANT 
+             Route names have to match exactly in the AppShell items
+            or else problems will arise with the navigation.
+             */
             Routing.RegisterRoute(nameof(AddFoodPage), typeof(AddFoodPage));
             Routing.RegisterRoute(nameof(FoodDetailsPage), typeof(FoodDetailsPage));
+            Routing.RegisterRoute(nameof(FoodEquipmentPage), typeof(FoodEquipmentPage));
         }
 
     }
