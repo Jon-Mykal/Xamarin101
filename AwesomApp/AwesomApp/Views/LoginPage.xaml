@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="AwesomApp.Views.LoginPage"
+             xmlns:viewmodels="clr-namespace:AwesomApp.ViewModels"
              Shell.FlyoutBehavior="Disabled"
              Shell.NavBarIsVisible="False">
     <!-- FlyoutItemIsVisible and NavBarIsVisible
@@ -15,8 +16,9 @@
                 <Button Text="LOGIN"
                     x:Name="loginBtn"
                     VerticalOptions="Center"
-                    Clicked="OnLoginBtnClicked"
-                    HorizontalOptions="CenterAndExpand"/>
+                    Command="{Binding LoginCmd}"
+                    HorizontalOptions="CenterAndExpand"
+                    Style="{StaticResource BaseButton}"/>
             </StackLayout>
         </StackLayout>
     </ContentPage.Content>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using AwesomApp.ViewModels;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +19,7 @@ namespace AwesomApp.Views
         public LoginPage()
         {
             InitializeComponent();
-          
+            BindingContext = new LoginViewModel();
         }
 
         protected override async void OnAppearing()
@@ -33,11 +35,11 @@ namespace AwesomApp.Views
             }
         }
 
-        // TODO: Replace this with ViewModel
-        public async void OnLoginBtnClicked(object sender, EventArgs e)
-        {
-            Preferences.Set(key, true);
-            await Shell.Current.GoToAsync($"//{nameof(FoodEquipmentPage)}");
-        }
+        
+        //public async void OnLoginBtnClicked(object sender, EventArgs e)
+        //{
+        //    Preferences.Set(key, true);
+        //    await Shell.Current.GoToAsync($"//{nameof(FoodEquipmentPage)}");
+        //}
     }
 }
