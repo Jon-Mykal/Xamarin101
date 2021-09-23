@@ -37,7 +37,7 @@
                   IsPullToRefreshEnabled="True"
                   IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                   RefreshCommand="{Binding RefreshCmd}"
-                  RefreshControlColor="CadetBlue"
+                  RefreshControlColor="{StaticResource RefreshColour}"
                   HasUnevenRows="True">
             <ListView.Behaviors>
                 <xct:EventToCommandBehavior 
