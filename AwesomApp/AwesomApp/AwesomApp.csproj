@@ -6,6 +6,22 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Fonts\Font Awesome 6 Brands-Regular-400.otf" />
+    <None Remove="Resources\Fonts\Font Awesome 6 Free-Regular-400.otf" />
+    <None Remove="Resources\Fonts\Font Awesome 6 Free-Solid-900.otf" />
+    <None Remove="Resources\Fonts\OpenSans\OpenSans-Italic-VariableFont_wdth,wght.ttf" />
+    <None Remove="Resources\Fonts\OpenSans\OpenSans-VariableFont_wdth,wght.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Fonts\Font Awesome 6 Brands-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\Fonts\Font Awesome 6 Free-Regular-400.otf" />
+    <EmbeddedResource Include="Resources\Fonts\Font Awesome 6 Free-Solid-900.otf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-Italic-VariableFont_wdth,wght.ttf" />
+    <EmbeddedResource Include="Resources\Fonts\OpenSans\OpenSans-VariableFont_wdth,wght.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="ReactiveUI" Version="16.2.6" />
     <PackageReference Include="ReactiveUI.Fody" Version="16.2.6" />
     <PackageReference Include="ReactiveUI.XamForms" Version="16.2.6" />
