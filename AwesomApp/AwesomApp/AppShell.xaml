@@ -2,6 +2,7 @@
 <Shell xmlns="http://xamarin.com/schemas/2014/forms" 
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:AwesomApp.Views"
+       xmlns:fontAwesome="clr-namespace:FontAwesome"
        Title="AwesomApp"
        x:Class="AwesomApp.AppShell">
 
@@ -81,7 +82,11 @@
     <ShellItem Route="LoginPage" FlyoutItemIsVisible="False">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
     </ShellItem>
-    <FlyoutItem Title="Equipment" Icon="icon_about.png">
+    <FlyoutItem Title="Equipment">
+        <FlyoutItem.Icon>
+            <FontImageSource FontFamily="FAS"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Coffee}" />
+        </FlyoutItem.Icon>
         <ShellContent Route="FoodEquipmentPage" ContentTemplate="{DataTemplate local:FoodEquipmentPage}" />
     </FlyoutItem>
 
