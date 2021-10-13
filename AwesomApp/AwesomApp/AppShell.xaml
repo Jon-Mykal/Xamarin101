@@ -3,6 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:local="clr-namespace:AwesomApp.Views"
        xmlns:fontAwesome="clr-namespace:FontAwesome"
+       xmlns:sys="clr-namespace:System;assembly=netstandard"
        Title="AwesomApp"
        x:Class="AwesomApp.AppShell">
 
@@ -82,16 +83,19 @@
     <ShellItem Route="LoginPage" FlyoutItemIsVisible="False">
         <ShellContent ContentTemplate="{DataTemplate local:LoginPage}" />
     </ShellItem>
+    <!-- FlyoutItem will display tabs 
+         if multiple ShellContent objects are in the flyout -->
+    <FlyoutItem Title="Beverages">
+        <ShellContent  Route="BeveragesPage" ContentTemplate="{DataTemplate local:BeveragesPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Equipment">
-        <FlyoutItem.Icon>
-            <FontImageSource FontFamily="FAS"
-                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Coffee}" />
-        </FlyoutItem.Icon>
         <ShellContent Route="FoodEquipmentPage" ContentTemplate="{DataTemplate local:FoodEquipmentPage}" />
     </FlyoutItem>
-
-
-   
+    <!--<ShellContent.Icon>
+                <FontImageSource FontFamily="FAS"
+                             Glyph="{x:Static fontAwesome:FontAwesomeIcons.Coffee}" />
+            </ShellContent.Icon>-->
+    <MenuItem Text="Logout"/>
 
     <!--
         TabBar lets you define content that won't show up in a flyout menu. When this content is active
@@ -104,17 +108,71 @@
         
     </TabBar>
 
-    <!-- Optional Templates 
-    // These may be provided inline as below or as separate classes.
+    <Shell.FlyoutBackground>
+        <SolidColorBrush Color="Azure" />
+    </Shell.FlyoutBackground>
+    <!-- Sets the overlay colour -->
+    <Shell.FlyoutBackdrop>
+        <SolidColorBrush Color="CadetBlue" />
+    </Shell.FlyoutBackdrop>
+    <!-- Optional Templates --> 
+    <!--// These may be provided inline as below or as separate classes.
 
     // This header appears at the top of the Flyout.
-    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyout-header
+    // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#flyout-header-->
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
-            <Grid>ContentHere</Grid>
+            <Grid BackgroundColor="{StaticResource Secondary}"
+                  HeightRequest="100"
+                  Padding="20, 66, 0, 40">
+                <Label Text="Menu"
+                       FontSize="Title"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       VerticalOptions="Center" 
+                       HorizontalOptions="Center"
+                       Grid.ColumnSpan="2" />
+            </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>
 
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <Grid Padding="10, 5"
+                  BackgroundColor="LightSlateGray"
+                  HeightRequest="15">
+                <Label Text="{Binding Source={x:Static sys:DateTime.Now}, StringFormat='Date: {0:MMMM dd, yyyy}'}"
+                       FontSize="Caption"
+                       TextColor="White"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="20, 10"
+                  HeightRequest="30">
+                <Label Text="{Binding Title}"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Bold"/>
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+    <Shell.MenuItemTemplate>
+        <DataTemplate>
+            <Grid Padding="20"
+                  HeightRequest="30">
+                <Label Text="{Binding Title}"
+                       TextColor="{StaticResource Primary}"
+                       VerticalTextAlignment="Center"
+                       FontAttributes="Bold" />
+            </Grid>
+        </DataTemplate>
+    </Shell.MenuItemTemplate>
+    
+    <!--
     // ItemTemplate is for ShellItems as displayed in a Flyout
     // https://docs.microsoft.com/xamarin/xamarin-forms/app-fundamentals/shell/flyout#define-flyoutitem-appearance
     <Shell.ItemTemplate>
