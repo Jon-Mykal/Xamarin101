@@ -1,4 +1,5 @@
-﻿using AwesomApp.Models;
+﻿using AwesomApp.Contracts;
+using AwesomApp.Models;
 using AwesomApp.Services;
 using AwesomApp.Views;
 
@@ -127,6 +128,8 @@ namespace AwesomApp.ViewModels
             var foods = await FoodService.GetAllFood();
             Food.AddRange(foods);
             IsBusy = false;
+
+            DependencyService.Get<IToast>()?.MakeToast("Refreshed!");
         }
 
         void IncreaseCount()
