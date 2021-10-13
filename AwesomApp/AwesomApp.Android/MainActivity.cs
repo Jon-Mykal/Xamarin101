@@ -4,6 +4,8 @@ using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
 using Android.OS;
+using Xamarin.Forms;
+using AwesomApp.Contracts;
 
 namespace AwesomApp.Droid
 {
@@ -14,6 +16,8 @@ namespace AwesomApp.Droid
         {
             base.OnCreate(savedInstanceState);
 
+            // Register the dependency in the IoC container
+            DependencyService.Register<IToast, Toaster_Android>();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             LoadApplication(new App());
