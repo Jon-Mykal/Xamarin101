@@ -14,6 +14,7 @@ namespace AwesomApp
         {
             InitializeComponent();
             MainPage = new AppShell();
+
         }
 
         protected override void OnStart()
