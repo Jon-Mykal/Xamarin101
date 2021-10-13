@@ -21,6 +21,8 @@ namespace AwesomApp
             Routing.RegisterRoute(nameof(AddFoodPage), typeof(AddFoodPage));
             Routing.RegisterRoute(nameof(FoodDetailsPage), typeof(FoodDetailsPage));
             Routing.RegisterRoute(nameof(FoodEquipmentPage), typeof(FoodEquipmentPage));
+            Routing.RegisterRoute(nameof(BeveragesPage), typeof(BeveragesPage));
+            
         }
 
     }
