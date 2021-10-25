@@ -14,7 +14,7 @@
             <x:String x:Key="IconCoffee">&#xf0f4;</x:String>
 
             <Style x:Key="BaseButton" TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource RefreshColour}"></Setter>
+                <Setter Property="BackgroundColor" Value="{StaticResource Secondary}"></Setter>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="TextColor" Value="White"></Setter>
@@ -23,7 +23,7 @@
                         <VisualStateGroup x:Name="CommonStates">
                             <VisualState x:Name="Normal">
                                 <VisualState.Setters>
-                                    <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
                                 </VisualState.Setters>
                             </VisualState>
                             <VisualState x:Name="Disabled">
