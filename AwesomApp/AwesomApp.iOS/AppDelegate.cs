@@ -22,6 +22,9 @@ namespace AwesomApp.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            // Register Syncfusion License
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTE5MzE0QDMxMzkyZTMzMmUzMFFSNEM4TW56Tmt5N1QwMTZkaXhiUXYvNVBrNmZCb2N4TEoxNkdubGgxT2s9");
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
