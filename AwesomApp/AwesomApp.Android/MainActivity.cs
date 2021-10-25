@@ -14,6 +14,8 @@ namespace AwesomApp.Droid
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
+            // Register Syncfusion License
+            Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("NTE5MzE0QDMxMzkyZTMzMmUzMFFSNEM4TW56Tmt5N1QwMTZkaXhiUXYvNVBrNmZCb2N4TEoxNkdubGgxT2s9");
             base.OnCreate(savedInstanceState);
 
             // Register the dependency in the IoC container
